@@ -143,6 +143,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FBX_SDK_Dx12Wrapper.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FBX_SDK_Dx12Wrapper.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
