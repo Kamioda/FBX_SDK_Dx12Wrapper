@@ -102,7 +102,7 @@ namespace meigetsusoft {
 								int directIndex = -1;
 								if (GeoElement::eByPolygonVertex == mapMode) {
 									if (GeoElement::eDirect == refMode) directIndex = vertexID;
-									else if (GeoElement::eIndexToDirect)
+									else if (GeoElement::eIndexToDirect == refMode)
 										directIndex = geometryElementNormal->GetIndexArray().GetAt(vertexID);
 								}
 								if (directIndex == -1) continue;
