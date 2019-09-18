@@ -62,11 +62,7 @@ namespace meigetsusoft {
 						Importer(const Manager& manager, const std::string& ImporterName);
 					};
 
-					class Mesh : public std::unique_ptr<FbxMesh> {
-					public:
-						Mesh(FbxMesh* mesh) : std::unique_ptr<FbxMesh>(mesh) {}
-					};
-
+					using Mesh = FBXBase<FbxMesh>;
 					using GeometryElementUV = FBXBase<FbxGeometryElementUV>;
 					using GeometryElementNormal = FBXBase<FbxGeometryElementNormal>;
 				}
