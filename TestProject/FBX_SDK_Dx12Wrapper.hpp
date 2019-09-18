@@ -91,8 +91,6 @@ namespace meigetsusoft {
 					Mesh(const Core::Mesh& mesh);
 					auto& GetVertices() { return this->m_vVertices; }
 					auto& GetIndices() { return this->m_vIndices; }
-					void FlipVertices();
-					void FlipIndices();
 				};
 
 			}
