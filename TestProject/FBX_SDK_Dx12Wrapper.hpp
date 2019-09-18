@@ -17,13 +17,6 @@ namespace meigetsusoft {
 					MSDirectX::XMFLOAT2 m_UVs;
 					int m_numControlPointIndex;
 				};
-				class Mesh {
-				private:
-					std::vector<Vertex> m_vVertices;
-					std::vector<unsigned int> m_vIndices;
-				public:
-
-				};
 				namespace Core {
 					template<class C> class FBXBase {
 					private:
@@ -78,8 +71,21 @@ namespace meigetsusoft {
 					bool MakeScene(const std::string& SceneName);
 					bool DeleteScene(const std::string& SceneName);
 					Core::Mesh LoadFBX(const std::string& FilePath, const std::string& SceneName);
-					static Mesh LoadMesh(const Core::Mesh& mesh);
 				};
+
+				class Mesh {
+				private:
+					std::vector<Vertex> m_vVertices;
+					std::vector<unsigned int> m_vIndices;
+				public:
+					Mesh() = default;
+					Mesh(const Core::Mesh& mesh);
+					auto& GetVertices() { return this->m_vVertices; }
+					auto& GetIndices() { return this->m_vIndices; }
+					void FlipVertices();
+					void FlipIndices();
+				};
+
 			}
 		}
 	}

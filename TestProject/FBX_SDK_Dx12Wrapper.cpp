@@ -47,13 +47,13 @@ namespace meigetsusoft {
 					return mesh;
 				}
 
-				Mesh FBXLoadManager::LoadMesh(const Core::Mesh& mesh) {
+				Mesh::Mesh(const Core::Mesh& mesh) {
 					using GeoElement = FbxGeometryElement;
+					using LayerElement = FbxLayerElement;
 					const int polygonCount = mesh->GetPolygonCount();
 					auto controlPoints = mesh->GetControlPoints();
 					const int controlPointCount = mesh->GetControlPointsCount();
 					int vertexID = 0;
-					Mesh RetVal{};
 					for (int polygon = 0; polygon < polygonCount; polygon++) {
 						const int polyVertCount = mesh->GetPolygonSize(polygon);
 						for (int polyVert = 0; polyVert < polyVertCount; polyVert++) {
