@@ -4,6 +4,7 @@
 #include <Shlwapi.h>
 #include <algorithm>
 #pragma comment(lib, "libfbxsdk.lib")
+#pragma comment(lib, "Shlwapi.lib")
 
 namespace meigetsusoft {
 	namespace DirectX {
