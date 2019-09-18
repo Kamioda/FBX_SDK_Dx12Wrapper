@@ -54,11 +54,13 @@ namespace meigetsusoft {
 
 					class Scene : public FBXBase<FbxScene> {
 					public:
+						Scene();
 						Scene(const Manager& manager, const std::string& SceneName);
 					};
 
 					class Importer : public FBXBase<FbxImporter> {
 					public:
+						Importer();
 						Importer(const Manager& manager, const std::string& ImporterName);
 					};
 

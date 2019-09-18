@@ -12,8 +12,12 @@ namespace meigetsusoft {
 				namespace Core {
 					Manager::Manager() : InternalClass(FbxManager::Create()) {}
 
+					Scene::Scene() : InternalClass(nullptr) {}
+
 					Scene::Scene(const Manager& manager, const std::string& SceneName)
 						: InternalClass(FbxScene::Create(manager.Get(), SceneName.c_str())) {}
+
+					Importer::Importer() : InternalClass(nullptr) {}
 
 					Importer::Importer(const Manager& manager, const std::string& ImporterName)
 						: InternalClass(FbxImporter::Create(manager.Get(), ImporterName.c_str())) {}
