@@ -91,6 +91,8 @@ namespace meigetsusoft {
 					Mesh(const Core::Mesh& mesh);
 					auto& GetVertices() { return this->m_vVertices; }
 					auto& GetIndices() { return this->m_vIndices; }
+					const auto& GetVertices() const noexcept { return this->m_vVertices; }
+					const auto& GetIndices() const noexcept { return this->m_vIndices; }
 				};
 
 			}
