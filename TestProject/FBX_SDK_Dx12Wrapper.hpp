@@ -69,17 +69,6 @@ namespace meigetsusoft {
 					using GeometryElementNormal = FBXBase<FbxGeometryElementNormal>;
 				}
 
-				class FBXLoadManager {
-				private:
-					Core::Manager FBXManager;
-					std::map<std::string, Core::Scene> FBXScenes;
-				public:
-					FBXLoadManager() = default;
-					bool MakeScene(const std::string& SceneName);
-					bool DeleteScene(const std::string& SceneName);
-					Core::Mesh LoadFBX(const std::string& FilePath, const std::string& SceneName);
-				};
-
 				class Mesh {
 				private:
 					std::vector<Vertex> m_vVertices;
@@ -93,6 +82,19 @@ namespace meigetsusoft {
 					auto& GetIndices() noexcept { return this->m_vIndices; }
 				};
 
+				class FBXLoadManager {
+				private:
+					Core::Manager FBXManager;
+					std::map<std::string, Core::Scene> FBXScenes;
+				public:
+					FBXLoadManager() = default;
+					bool MakeScene(const std::string& SceneName);
+					bool DeleteScene(const std::string& SceneName);
+				private:
+					Core::Mesh LoadFBXFile(const std::string& FilePath, const std::string& SceneName);
+				public:
+					Mesh LoadFBX(const std::string& FilePath, const std::string& SceneName) { return Mesh(this->LoadFBXFile(FilePath, SceneName)); }
+				};
 			}
 		}
 	}

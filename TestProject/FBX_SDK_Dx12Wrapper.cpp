@@ -37,7 +37,7 @@ namespace meigetsusoft {
 					return true;
 				}
 
-				Core::Mesh FBXLoadManager::LoadFBX(const std::string& FilePath, const std::string& SceneName) {
+				Core::Mesh FBXLoadManager::LoadFBXFile(const std::string& FilePath, const std::string& SceneName) {
 					if (FALSE == PathFileExistsA(FilePath.c_str()))
 						throw std::runtime_error(FilePath + " : File is not found.");
 					FbxString FileName(FilePath.c_str());
