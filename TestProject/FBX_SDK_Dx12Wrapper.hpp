@@ -5,6 +5,8 @@
 #include <vector>
 #include <memory>
 #include <map>
+#include <type_traits>
+#include <cstring>
 namespace MSDirectX = ::DirectX;
 
 namespace meigetsusoft {
@@ -17,6 +19,13 @@ namespace meigetsusoft {
 					MSDirectX::XMFLOAT2 m_UVs;
 					int m_numControlPointIndex;
 				};
+				static_assert(std::is_trivially_copyable_v<Vertex>);
+				inline bool operator == (const Vertex& a, const Vertex& b) {
+					return 0 == std::memcmp(static_cast<const void*>(&a), static_cast<const void*>(&b), sizeof(Vertex));
+				}
+				inline bool operator != (const Vertex& a, const Vertex& b) {
+					return !(a == b);
+				}
 				namespace Core {
 					template<class C> class FBXBase {
 					private:
