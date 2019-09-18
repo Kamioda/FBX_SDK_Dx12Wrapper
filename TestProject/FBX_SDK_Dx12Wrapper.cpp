@@ -2,6 +2,7 @@
 #include <DirectXMath.h>
 #include <d3dcompiler.h>
 #include <Shlwapi.h>
+#include <algorithm>
 #pragma comment(lib, "libfbxsdk.lib")
 
 namespace meigetsusoft {
@@ -91,7 +92,28 @@ namespace meigetsusoft {
 							const int normalElementCount = mesh->GetElementNormalCount();
 							for (int normalElement = 0; normalElement < normalElementCount; normalElement++) {
 								const Core::GeometryElementNormal geometryElementNormal = mesh->GetElementNormal(normalElement);
+								const LayerElement::EMappingMode mapMode = geometryElementNormal->GetMappingMode();
+								const LayerElement::EReferenceMode refMode = geometryElementNormal->GetReferenceMode();
+								int directIndex = -1;
+								if (GeoElement::eByPolygonVertex == mapMode) {
+									if (GeoElement::eDirect == refMode) directIndex = vertexID;
+									else if (GeoElement::eIndexToDirect)
+										directIndex = geometryElementNormal->GetIndexArray().GetAt(vertexID);
+								}
+								if (directIndex == -1) continue;
+								FbxVector4 norm = geometryElementNormal->GetDirectArray().GetAt(directIndex);
+								uniqueVert.m_normals = MSDirectX::XMFLOAT3(
+									static_cast<float>(norm.mData[0]),
+									static_cast<float>(norm.mData[1]),
+									static_cast<float>(norm.mData[2])
+								);
 							}
+
+							auto i = std::find(this->m_vVertices.begin(), this->m_vVertices.end(), uniqueVert);
+							if (this->m_vVertices.end() == i) this->m_vVertices.emplace_back(uniqueVert);
+							// TODO: change Indices element type from unsigned int to size_t
+							this->m_vIndices.emplace_back(static_cast<unsigned int>(std::distance(this->m_vVertices.begin(), i)));
+							vertexID++;
 						}
 					}
 				}
